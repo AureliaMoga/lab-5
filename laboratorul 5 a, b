@@ -1,0 +1,129 @@
+//punctul a
+#include <iostream>
+#include <string>
+
+class Carte {
+public:
+    std::string titlu;
+
+    Carte(const std::string& titlu) : titlu(titlu) {}
+
+    void AfiseazaInformatii() {
+        std::cout << "Carte: " << titlu << std::endl;
+    }
+};
+
+class Caiet : public Carte {
+public:
+    int numarFile;
+
+    Caiet(const std::string& titlu, int numarFile) : Carte(titlu), numarFile(numarFile) {}
+
+    void AfiseazaInformatii() {
+        Carte::AfiseazaInformatii();
+        std::cout << "Caiet cu " << numarFile << " file." << std::endl;
+    }
+};
+
+class CaietDeNotite : public Caiet {
+public:
+    std::string tema;
+
+    CaietDeNotite(const std::string& titlu, int numarFile, const std::string& tema)
+        : Caiet(titlu, numarFile), tema(tema) {}
+
+    void AfiseazaInformatii() {
+        Caiet::AfiseazaInformatii();
+        std::cout << "Tema: " << tema << std::endl;
+    }
+};
+
+int main() {
+    Carte carte("Programare in C++");
+    Caiet caiet("Matematica", 50);
+    CaietDeNotite caietDeNotite("Inteligenta Artificiala", 100, "Implementare algoritm");
+
+    carte.AfiseazaInformatii();
+    std::cout << std::endl;
+
+    caiet.AfiseazaInformatii();
+    std::cout << std::endl;
+
+    caietDeNotite.AfiseazaInformatii();
+
+    return 0;
+}
+
+
+//punctul b
+#include <iostream>
+#include <string>
+
+class Hartie {
+public:
+    std::string tipHartie;
+
+    Hartie(const std::string& tipHartie) : tipHartie(tipHartie) {}
+
+    void AfiseazaInformatii() {
+        std::cout << "Hartie de tip: " << tipHartie << std::endl;
+    }
+};
+
+class Carte : public Hartie {
+public:
+    std::string titlu;
+
+    Carte(const std::string& tipHartie, const std::string& titlu) : Hartie(tipHartie), titlu(titlu) {}
+
+    void AfiseazaInformatii() {
+        Hartie::AfiseazaInformatii();
+        std::cout << "Carte cu titlul: " << titlu << std::endl;
+    }
+};
+
+class Caiet : public Hartie {
+public:
+    int numarFile;
+
+    Caiet(const std::string& tipHartie, int numarFile) : Hartie(tipHartie), numarFile(numarFile) {}
+
+    void AfiseazaInformatii() {
+        Hartie::AfiseazaInformatii();
+        std::cout << "Caiet cu " << numarFile << " file." << std::endl;
+    }
+};
+
+class CaietDeNotite : public Carte, public Caiet {
+public:
+    std::string tema;
+
+    CaietDeNotite(const std::string& tipHartie, int numarFile, const std::string& titlu, const std::string& tema)
+        : Carte(tipHartie, titlu), Caiet(tipHartie, numarFile), tema(tema) {}
+
+    void AfiseazaInformatii() {
+        Carte::AfiseazaInformatii();
+        Caiet::AfiseazaInformatii();
+        std::cout << "Tema: " << tema << std::endl;
+    }
+};
+
+int main() {
+    Hartie hartie("simpla");
+    Carte carte("carton", "Programarea in C++");
+    Caiet caiet("hârtie simplă", 50);
+    CaietDeNotite caietDeNotite("hârtie reciclată", 100, "Programarea in C++", "Idei pentru proiect");
+
+    hartie.AfiseazaInformatii();
+    std::cout << std::endl;
+
+    carte.AfiseazaInformatii();
+    std::cout << std::endl;
+
+    caiet.AfiseazaInformatii();
+    std::cout << std::endl;
+
+    caietDeNotite.AfiseazaInformatii();
+
+    return 0;
+}
